@@ -15,6 +15,7 @@ import {
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { CircleCheck, CircleX, ClipboardCopy } from "lucide-react";
+import toast from "react-hot-toast";
 
 type urlDefinition = {
   originalUrl: string;
@@ -38,6 +39,15 @@ const CreateUrlForm = () => {
       alias: "",
     },
   });
+
+  const copyUrl = () => {
+    if (urlObj) {
+      navigator.clipboard.writeText(
+        `https://eleganturl.deno.dev/${urlObj.alias}`
+      );
+    }
+    toast.success("URL copied to clipboard.");
+  };
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
@@ -125,7 +135,7 @@ const CreateUrlForm = () => {
         </form>
       </Form>
 
-      <div className="flex flex-col h-24 font-poppins">
+      <div className="flex flex-col h-24 font-poppins lg:mt-0 mt-8">
         {isSuccess === 1 && (
           <div>
             <div className="flex justify-center items-center gap-x-2">
@@ -134,21 +144,24 @@ const CreateUrlForm = () => {
             </div>
             <div className="mt-5 flex justify-center items-center gap-x-2 font-medium border-2 rounded-md p-2">
               <p>https://eleganturl.deno.dev/{urlObj?.alias}</p>
-              <Button type="button" variant="outline" size="icon">
+              <Button
+                type="button"
+                variant="outline"
+                size="icon"
+                onClick={() => copyUrl()}
+              >
                 <ClipboardCopy />
               </Button>
             </div>
           </div>
         )}
         {isSuccess === 2 && (
-          <div>
-            <div className="flex justify-center items-center gap-x-2">
-              <CircleX width={25} height={25} color="red" />
-              <p>
-                Sorry, but this costumized URL is already exist. Please try
-                another one 🙏
-              </p>
-            </div>
+          <div className="flex justify-center items-center gap-x-2">
+            <CircleX width={25} height={25} color="red" />
+            <p>
+              Sorry, but this short URL already exists. Please try another one
+              🙏
+            </p>
           </div>
         )}
       </div>

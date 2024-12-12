@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Pacifico, Caveat, Poppins } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -34,6 +35,7 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} ${pacifico.variable} ${caveat.variable} antialiased`}
       >
+        <Toaster />
         {children}
       </body>
     </html>
