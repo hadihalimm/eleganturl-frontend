@@ -2,7 +2,7 @@ import CreateUrlForm from "@/components/shared/createUrlForm";
 
 export default function Home() {
   return (
-    <main className="flex flex-col max-w-7xl justify-center items-center mx-auto h-[80vh]">
+    <main className="flex flex-col max-w-7xl justify-center items-center mx-auto h-[90vh]">
       <div className="flex flex-col">
         <h1 className="font-pacifico text-5xl lg:text-8xl text-center">
           Elegant
